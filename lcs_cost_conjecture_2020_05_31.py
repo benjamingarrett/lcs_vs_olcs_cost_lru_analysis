@@ -186,7 +186,7 @@ def get_best_poly_bound_2(pts, n0, n1, eps, bound_func):
   return c2, c1, c0
 
 
-def get_best_poly_bound_3(pts, n0, n1, eps, bound_func):
+def get_best_poly_bound_3(pts, n0, n1, eps, bound_func, dependent_convergence=False):
   cjpts = [(k[0], k[1]) for k in pts if n0 <= k[0] and k[0] <= n1]
   x = [k[0] for k in cjpts]
   y = [k[1] for k in cjpts]
@@ -203,7 +203,10 @@ def get_best_poly_bound_3(pts, n0, n1, eps, bound_func):
     if cnt > MAX_ITERATIONS:
       print('exiting before convergence')
       exit()
-  bound = lambda x: c2 * x**2 + c1 * x + c0_orig
+  if dependent_convergence:
+    bound = lambda x: c2 * x**2 + c1 * x + c0
+  else:
+    bound = lambda x: c2 * x**2 + c1 * x + c0_orig
   while not bound_func(cjpts, bound):
     c1 += eps
     cnt += 1
@@ -213,7 +216,7 @@ def get_best_poly_bound_3(pts, n0, n1, eps, bound_func):
   return c2, c1, c0
 
 
-def get_best_poly_bound_4(pts, n0, n1, eps, bound_func):
+def get_best_poly_bound_4(pts, n0, n1, eps, bound_func, dependent_convergence=False):
   cjpts = [(k[0], k[1]) for k in pts if n0 <= k[0] and k[0] <= n1]
   x = [k[0] for k in cjpts]
   y = [k[1] for k in cjpts]
@@ -230,7 +233,10 @@ def get_best_poly_bound_4(pts, n0, n1, eps, bound_func):
     if cnt > MAX_ITERATIONS:
       print('exiting before convergence')
       exit()
-  bound = lambda x: c2 * x**2 + c1 * x + c0_orig
+  if dependent_convergence:
+    bound = lambda x: c2 * x**2 + c1 * x + c0
+  else:
+    bound = lambda x: c2 * x**2 + c1 * x + c0_orig
   while not bound_func(cjpts, bound):
     c2 += eps
     cnt += 1
@@ -240,7 +246,7 @@ def get_best_poly_bound_4(pts, n0, n1, eps, bound_func):
   return c2, c1, c0
 
 
-def get_best_poly_bound_5(pts, n0, n1, eps, bound_func):
+def get_best_poly_bound_5(pts, n0, n1, eps, bound_func, dependent_convergence=False):
   cjpts = [(k[0], k[1]) for k in pts if n0 <= k[0] and k[0] <= n1]
   x = [k[0] for k in cjpts]
   y = [k[1] for k in cjpts]
@@ -257,7 +263,10 @@ def get_best_poly_bound_5(pts, n0, n1, eps, bound_func):
     if cnt > MAX_ITERATIONS:
       print('exiting before convergence')
       exit()
-  bound = lambda x: c2 * x**2 + c1_orig * x + c0
+  if dependent_convergence:
+    bound = lambda x: c2 * x**2 + c1 * x + c0
+  else: 
+    bound = lambda x: c2 * x**2 + c1_orig * x + c0
   while not bound_func(cjpts, bound):
     c2 += eps
     cnt += 1
@@ -267,7 +276,7 @@ def get_best_poly_bound_5(pts, n0, n1, eps, bound_func):
   return c2, c1, c0
 
 
-def get_best_poly_bound_6(pts, n0, n1, eps, bound_func):
+def get_best_poly_bound_6(pts, n0, n1, eps, bound_func, dependent_convergence=False):
   cjpts = [(k[0], k[1]) for k in pts if n0 <= k[0] and k[0] <= n1]
   x = [k[0] for k in cjpts]
   y = [k[1] for k in cjpts]
@@ -284,14 +293,20 @@ def get_best_poly_bound_6(pts, n0, n1, eps, bound_func):
     if cnt > MAX_ITERATIONS:
       print('exiting before convergence')
       exit()
-  bound = lambda x: c2 * x**2 + c1 * x + c0_orig
+  if dependent_convergence:
+    bound = lambda x: c2 * x**2 + c1 * x + c0
+  else: 
+    bound = lambda x: c2 * x**2 + c1 * x + c0_orig
   while not bound_func(cjpts, bound):
     c1 += eps
     cnt += 1
     if cnt > MAX_ITERATIONS:
       print('exiting before convergence')
       exit()
-  bound = lambda x: c2 * x**2 + c1_orig * x + c0_orig
+  if dependent_convergence:
+    bound = lambda x: c2 * x**2 + c1 * x + c0
+  else: 
+    bound = lambda x: c2 * x**2 + c1_orig * x + c0_orig
   while not bound_func(cjpts, bound):
     c2 += eps
     cnt += 1
@@ -472,6 +487,43 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 # seventh method
 poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_6(lft, min_x, max_x, eps, bounds_below)
+poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
+poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
+if bounds_below(confirm_pts, poly_lower_bound):
+  poly_rgh_confirm_r2 = r2_score(confirm_y, [poly_lower_bound(k) for k in confirm_x])
+  lower_bound_list.append((poly_rgh_confirm_r2, poly_lower_bound, poly_lower_bound_str))
+
+
+
+# fourth method - dependent convergence
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_3(lft, min_x, max_x, eps, bounds_below, dependent_convergence=True)
+poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
+poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
+if bounds_below(confirm_pts, poly_lower_bound):
+  poly_rgh_confirm_r2 = r2_score(confirm_y, [poly_lower_bound(k) for k in confirm_x])
+  lower_bound_list.append((poly_rgh_confirm_r2, poly_lower_bound, poly_lower_bound_str))
+
+
+# fifth method - dependent convergence
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_4(lft, min_x, max_x, eps, bounds_below, dependent_convergence=True)
+poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
+poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
+if bounds_below(confirm_pts, poly_lower_bound):
+  poly_rgh_confirm_r2 = r2_score(confirm_y, [poly_lower_bound(k) for k in confirm_x])
+  lower_bound_list.append((poly_rgh_confirm_r2, poly_lower_bound, poly_lower_bound_str))
+
+
+# sixth method - dependent convergence
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_5(lft, min_x, max_x, eps, bounds_below, dependent_convergence=True)
+poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
+poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
+if bounds_below(confirm_pts, poly_lower_bound):
+  poly_rgh_confirm_r2 = r2_score(confirm_y, [poly_lower_bound(k) for k in confirm_x])
+  lower_bound_list.append((poly_rgh_confirm_r2, poly_lower_bound, poly_lower_bound_str))
+
+
+# seventh method - dependent convergence
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_6(lft, min_x, max_x, eps, bounds_below, dependent_convergence=True)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
