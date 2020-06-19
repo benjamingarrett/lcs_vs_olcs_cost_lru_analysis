@@ -441,7 +441,7 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 
 # second method
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_1(lft, min_x, max_x, eps, bounds_below)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_1(rgh, min_x, max_x, eps, bounds_below)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
@@ -450,7 +450,7 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 
 # third method
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_2(lft, min_x, max_x, eps, bounds_below)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_2(rgh, min_x, max_x, eps, bounds_below)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
@@ -459,7 +459,7 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 
 # fourth method
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_3(lft, min_x, max_x, eps, bounds_below)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_3(rgh, min_x, max_x, eps, bounds_below)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
@@ -468,7 +468,7 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 
 # fifth method
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_4(lft, min_x, max_x, eps, bounds_below)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_4(rgh, min_x, max_x, eps, bounds_below)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
@@ -477,7 +477,7 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 
 # sixth method
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_5(lft, min_x, max_x, eps, bounds_below)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_5(rgh, min_x, max_x, eps, bounds_below)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
@@ -486,7 +486,7 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 
 # seventh method
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_6(lft, min_x, max_x, eps, bounds_below)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_6(rgh, min_x, max_x, eps, bounds_below)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
@@ -494,9 +494,8 @@ if bounds_below(confirm_pts, poly_lower_bound):
   lower_bound_list.append((poly_rgh_confirm_r2, poly_lower_bound, poly_lower_bound_str))
 
 
-
 # fourth method - dependent convergence
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_3(lft, min_x, max_x, eps, bounds_below, dependent_convergence=True)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_3(rgh, min_x, max_x, eps, bounds_below, dependent_convergence=True)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
@@ -505,7 +504,7 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 
 # fifth method - dependent convergence
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_4(lft, min_x, max_x, eps, bounds_below, dependent_convergence=True)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_4(rgh, min_x, max_x, eps, bounds_below, dependent_convergence=True)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
@@ -514,7 +513,7 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 
 # sixth method - dependent convergence
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_5(lft, min_x, max_x, eps, bounds_below, dependent_convergence=True)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_5(rgh, min_x, max_x, eps, bounds_below, dependent_convergence=True)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
@@ -523,7 +522,7 @@ if bounds_below(confirm_pts, poly_lower_bound):
 
 
 # seventh method - dependent convergence
-poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_6(lft, min_x, max_x, eps, bounds_below, dependent_convergence=True)
+poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0 = get_best_poly_bound_6(rgh, min_x, max_x, eps, bounds_below, dependent_convergence=True)
 poly_lower_bound_str = get_poly_str(poly_lower_bound_c2, poly_lower_bound_c1, poly_lower_bound_c0)
 poly_lower_bound = lambda x: poly_lower_bound_c2 * x**2 + poly_lower_bound_c1 * x + poly_lower_bound_c0
 if bounds_below(confirm_pts, poly_lower_bound):
