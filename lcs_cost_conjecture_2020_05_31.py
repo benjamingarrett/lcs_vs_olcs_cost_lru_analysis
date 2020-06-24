@@ -555,7 +555,7 @@ if poly_lower_bound_confirmed:
 
 plt.xlabel('problem size (n)')
 plt.ylabel('critical cache size')
-t = 'LCS v2 cost, LRU, critical cache size (csize)'
+t = 'LCS v2 traceback, LRU, critical cache size (csize)'
 t+= '\nInstance type: a = ceiling(n/3)'
 t+= '\n1st sequence: 0^a 1^a 2^(n-2a)'
 t+= '\n2nd sequence: 2^(n-2a) 1^a 0^a'
